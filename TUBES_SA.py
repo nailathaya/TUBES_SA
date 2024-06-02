@@ -2,11 +2,11 @@ import time as t
 
 # Fungsi untuk perhitungan Brute Force
 def brute_force(course_list, max_sks):
-    n = len(course_list) 
-    best_combination = [] 
-    best_priority = 0
+    n = len(course_list)            # Memeriksa banyak course dalam array course_list
+    best_combination = []           # Variabel untuk menyimpan kombinasi mata kuliah terbaik
+    best_priority = 0               # Variabel untuk menyimpan jumlah nilai prioritas terbaik
     
-    # Generate all possible combinations of courses
+    # Perulangan untuk menemukan dan mengecek semua kombinasi pemilihan mata kuliah
     for i in range(1 << n):
         current_sks = 0
         current_priority = 0
@@ -14,7 +14,7 @@ def brute_force(course_list, max_sks):
         print(f" {(1 << n)}")
 
         for j in range(n): 
-            if i & (1 << j):                                                 
+            if i & (1 << j):                                               
                 current_sks += course_list[j]['sks']
                 current_priority += course_list[j]['priority']
                 current_combination.append(course_list[j])
@@ -28,12 +28,13 @@ def brute_force(course_list, max_sks):
 
 
 def greedy(course_list, max_sks):
-    # Sort the course list based on priority (descending)
+    # Mengurutkan course dalam array course_list secara descending berdasarkan nilai prioritas
     course_list.sort(key=lambda x: x['priority'], reverse=True)
 
-    current_sks = 0
-    selected_courses = []
-
+    current_sks = 0           # Variabel untuk menyimpan jumlah sks dari mata kuliah yang dipilih
+    selected_courses = []     # Variabel untuk menyimpan data mata kuliah yang dipilih
+    
+    # Perulangan untuk menemukan kombinasi mata kuliah dengan profit maksimal
     for course in course_list:
         if current_sks + course['sks'] <= max_sks:
             selected_courses.append(course)
