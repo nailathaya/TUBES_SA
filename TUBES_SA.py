@@ -11,7 +11,6 @@ def brute_force(course_list, max_sks):
         current_sks = 0
         current_priority = 0
         current_combination = []
-        print(f" {(1 << n)}")
 
         for j in range(n): 
             if i & (1 << j):                                               
@@ -19,7 +18,7 @@ def brute_force(course_list, max_sks):
                 current_priority += course_list[j]['priority']
                 current_combination.append(course_list[j])
 
-        # Check if this combination is the best so far
+        # Mengecek kombinasi saat ini apakah yang terbaik
         if current_sks <= max_sks and current_priority > best_priority:
             best_priority = current_priority
             best_combination = current_combination
@@ -69,7 +68,7 @@ atas_courses = [
 
 # MAX KAPASITAS
 class const:
-    max_sks = 24
+    max_sks = 24 
     total_paket_sks = sum(course['sks'] for course in paket_courses)
 
 # MATKUL PAKET DAN ULANG
@@ -103,11 +102,13 @@ def calc_RemainingSKS(curr_sks):
     return const.max_sks - curr_sks
 
 # Calculate current SKS after adding repeated and recommended courses
+
 current_sks = calc_AbsUlang(ulang_courses)
 rec_courses = calc_RecUlang(current_sks, Reculang_course)
 
 # Combine results into arrays
 all_courses = paket_courses + ulang_courses + rec_courses + atas_courses
+
 
 start_time_brute = t.time()
 brute_result = brute_force(all_courses, const.max_sks)
