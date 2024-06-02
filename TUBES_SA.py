@@ -1,23 +1,20 @@
-import time as t #Impor modul untuk perhitungan waktu tiap eksekusi algoritma
+import time as t 
 
 # Fungsi untuk perhitungan Brute Force
 def brute_force(course_list, max_sks):
-    n = len(course_list) # SKS total course itu masih > 24
+    n = len(course_list) 
     best_combination = [] 
     best_priority = 0
     
     # Generate all possible combinations of courses
-    for i in range(1 << n): # i = 0, 1 << i = 1 << 0 = 2^0 = 1 = 000000001
+    for i in range(1 << n):
         current_sks = 0
         current_priority = 0
         current_combination = []
         print(f" {(1 << n)}")
 
-        for j in range(n): # j = 0
-            if i & (1 << j): # 000000001 & (1 << j = 1 << 0 = 2^0 = 1 = 000000001)
-                             # 000000001 & 000000001 = 000000001 = 1
-                             # contoh:
-                             # 000110010 & 000100001 = 000100000 = 32 
+        for j in range(n): 
+            if i & (1 << j):                                                 
                 current_sks += course_list[j]['sks']
                 current_priority += course_list[j]['priority']
                 current_combination.append(course_list[j])
