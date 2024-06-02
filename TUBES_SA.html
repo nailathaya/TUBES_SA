@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/mascot.png"/>
+    <title>Course Selection</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #205bb4;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #1d4a91;
+        }
+        .page {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        #login-header {
+            height: 64px;
+            align-content: center;
+            background-color: #ffffff;
+        }
+        #login-header img {
+            width: auto;
+            height: 32px;
+            margin-left: 24px;
+        }
+        #login-body {
+            height: calc(100vh - 64px);
+            align-content: center;
+            background: url(assets/login_background.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        #login-container {
+            width: fit-content;
+            height: fit-content;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 24px;
+            border-radius: 24px;
+            background-color: #ffffff;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.35);
+            text-align: center;
+        }
+        #login-container h1 {
+            font-size: 18px;
+            color: #0e0e0e;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #login-container input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            width: 300px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        #login-button {
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        #login-error {
+            color: red;
+            margin-top: 10px;
+        }
+        #login-mascot {
+            width: 30vw;
+            height: auto;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        #user-data-header {
+            height: 64px;
+            align-content: center;
+            background-color: #ffffff;
+        }
+        #user-data-header img {
+            width: auto;
+            height: 32px;
+            margin-left: 24px;
+        }
+        #user-data-body {
+            display: flex;
+            flex-direction: row;
+            height: calc(100% - 64px);
+            background: linear-gradient(180deg, #84aae3 50%, #a4bfe5 100%);
+        }
+        #user-data-body table {
+            width: 100%;
+        }
+        #left-section {
+            width: 50vw;
+            padding: 32px 16px 32px 32px;
+        }
+        #user-section {
+            padding: 24px;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.35);
+        }
+        #user-detail-container {
+            padding: 16px;
+            color: #000000;
+            border-radius: 16px;
+            background-color: #eeeeee;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        #course-section {
+            margin-top: 32px;
+            padding: 24px;
+            border-radius: 16px;
+            background: #ffffff;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.35);
+        }
+        #right-section {
+            width: 50vw;
+            padding: 32px 32px 32px 16px;
+        }
+        #right-section img {
+            width: 40%;
+            height: auto;
+            margin-bottom: -4px;
+            margin-left: 60%;
+        }
+        #paket-course-section {
+            padding: 24px;
+            border-radius: 16px;
+            background: #f6e6b9;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.35);
+        }
+        #show-recommendation-button {
+            width: 50%;
+            margin-top: 32px;
+            margin-right: 25%;
+            margin-left: 25%;
+            background: #3c9945;
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.35);
+        }
+        #recommendation-page {
+            padding: 20px;
+            background: linear-gradient(180deg, #84aae3 50%, #a4bfe5 100%);
+        }
+        
+        h1, h2 {
+            color: #032D6C;
+        }
+        table {
+            width: 95%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #5d5a5a;
+            padding: 8px;
+            text-align: left;
+
+        }
+        th {
+            background-color: #032D6C;
+            color:#ffffff;
+            ;
+        }
+
+        td button {
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        @media screen and (max-width: 425px) {
+            #user-data-page {
+                width: 100vw;
+            }
+            #login-container input {
+                width: 264px;
+            }
+            #login-mascot {
+                width: auto;
+                height: 25vh;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            #user-data-body {
+                flex-direction: column;
+            }
+            #left-section, #right-section {
+                width: 100%;
+                padding: 0px;
+            }
+            #left-section {
+                margin: 16px 0px 8px 0px;
+            }
+            #right-section {
+                margin: 8px 0px 16px 0px;
+            }
+            #course-section {
+                margin-top: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Halaman 1: Login -->
+    <div id="login-page" class="page visible">
+        <div id="login-header">
+            <img src="assets/telkom_university_logo.png"/>
+        </div>
+        <div id="login-body">
+            <div id="login-container">
+                <h1>Login</h1>
+                <input type="text" id="username" placeholder="Username"><br>
+                <input type="password" id="password" placeholder="Password"><br>
+                <button id="login-button" onclick="login()">Login</button>
+                <p id="login-error"></p>
+            </div>
+            <img id="login-mascot" src="assets/mascot.png"/>
+        </div>
+    </div>
+
+    <!-- Halaman 2: Data User dan Mata Kuliah -->
+    <div id="user-data-page" class="page">
+        <div id="user-data-header">
+            <img src="assets/telkom_university_logo.png"/>
+        </div>
+        <div id="user-data-body">
+            <div id="left-section">
+                <div id="user-section">
+                    <h1>Welcome, <span id="user-name"></span></h1>
+                    <div id="user-detail-container">
+                        <p>NIM: <b><span id="user-nim"></span></b></p>
+                        <p>IP Semester: <b><span id="user-ip"></b></span></p>
+                        <p>Semester: <b><span id="user-semester"></b></span></p>
+                    </div>
+                </div>
+                <div id="course-section">
+                    <h2>Mata Kuliah Mengulang</h2>
+                    <table id="ulang-courses"></table>
+            
+                    <h2>Mata Kuliah Disarankan Mengulang</h2>
+                    <table id="reculang-courses"></table>
+            
+                    <h2>Mata Kuliah Atas</h2>
+                    <table id="atas-courses"></table>
+                </div>
+            </div>
+            <div id="right-section">
+                <img id="user-data-mascot" src="assets/mascot.png"/>
+                <div id="paket-course-section">
+                    <h2>Mata Kuliah Paket</h2>
+                    <table id="paket-courses"></table>
+                </div>
+                <button id="show-recommendation-button" onclick="gotoRecommendation()">Lihat Rekomendasi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Halaman 3: Rekomendasi Mata Kuliah -->
+    <div id="recommendation-page" class="page">
+        <h1>Rekomendasi Mata Kuliah</h1>
+        <h2>Brute Force</h2>
+        <table id="brute-force-courses"></table>
+        <p>Total SKS: <span id="brute-force-sks"></span></p>
+        <p>Total Prioritas: <span id="brute-force-priority"></span></p>
+        <p>Waktu Eksekusi: <span id="brute-force-time"></span> ms</p>
+
+        <h2>Greedy</h2>
+        <table id="greedy-courses"></table>
+        <p>Total SKS: <span id="greedy-sks"></span></p>
+        <p>Total Prioritas: <span id="greedy-priority"></span></p>
+        <p>Waktu Eksekusi: <span id="greedy-time"></span> ms</p>
+
+        <h2>Perbandingan Waktu Eksekusi</h2>
+        <p id="execution-comparison"></p>
+    </div>
+
+    <script>
+        const users = {
+            "user1": {
+                "password": "password1",
+                "nama": "Alice",
+                "nim": "12345678",
+                "ip": 3.5,
+                "semester": 4,
+                "paket_courses": [
+                    {"name": "Sistem Operasi", "sks": 3, "priority": 9},
+                    {"name": "Jaringan Komputer", "sks": 4, "priority": 10},
+                    {"name": "Strategi Algoritma", "sks": 3, "priority": 8},
+                    {"name": "Teori Bahasa dan Automata", "sks": 3, "priority": 7},
+                    {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
+                ],
+                "ulang_courses": [
+                    {"name": "Struktur Data", "sks": 4, "priority": 13}
+                ],
+                "reculang_courses": [
+                    {"name": "Kalkulus Lanjut", "sks": 3, "priority": 12},
+                    {"name": "Bahasa Indonesia", "sks": 2, "priority": 11}
+                ],
+                "atas_courses": [
+                    {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
+                    {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
+                    {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
+                ]
+            },
+            "u2": {
+                "password": "p2",
+                "nama": "Bob",
+                "nim": "87654321",
+                "ip": 3.8,
+                "semester": 4,
+                "paket_courses": [
+                    {"name": "Sistem Operasi", "sks": 3, "priority": 9},
+                    {"name": "Jaringan Komputer", "sks": 4, "priority": 10},
+                    {"name": "Strategi Algoritma", "sks": 3, "priority": 8},
+                    {"name": "Teori Bahasa dan Automata", "sks": 3, "priority": 7},
+                    {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
+                ],
+                "ulang_courses": [
+                    {"name": "Struktur Data", "sks": 4, "priority": 13}
+                ],
+                "reculang_courses": [
+                    {"name": "Kalkulus Lanjut", "sks": 3, "priority": 12},
+                    {"name": "Bahasa Indonesia", "sks": 2, "priority": 11}
+                ],
+                "atas_courses": [
+                    {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
+                    {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
+                    {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
+                ]
+            }
+        };
+
+        let currentUser = null;
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (users[username] && users[username].password === password) {
+                currentUser = users[username];
+                document.getElementById('login-page').style.display = "none";
+
+                document.getElementById('user-name').innerText = currentUser.nama;
+                document.getElementById('user-nim').innerText = currentUser.nim;
+                document.getElementById('user-ip').innerText = currentUser.ip;
+                document.getElementById('user-semester').innerText = currentUser.semester;
+
+                renderCourseTable('paket-courses', currentUser.paket_courses);
+                renderCourseTable('ulang-courses', currentUser.ulang_courses);
+                renderCourseTableWithRetake('reculang-courses', currentUser.reculang_courses);
+                renderCourseTable('atas-courses', currentUser.atas_courses);
+
+                document.getElementById('user-data-page').style.display = "block"
+            } else {
+                document.getElementById('login-error').innerText = 'Invalid username or password';
+            }
+        }
+
+        function renderCourseTable(elementId, courses) {
+            const table = document.getElementById(elementId);
+            table.innerHTML = '<tr><th>Nama Mata Kuliah</th><th>SKS</th><th>Prioritas</th></tr>';
+            courses.forEach(course => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = course.name;
+                row.insertCell(1).innerText = course.sks;
+                row.insertCell(2).innerText = course.priority;
+            });
+        }
+
+        function renderCourseTableWithRetake(elementId, courses) {
+            const table = document.getElementById(elementId);
+            table.innerHTML = '<tr><th>Nama Mata Kuliah</th><th>SKS</th><th>Prioritas</th><th>Aksi</th></tr>';
+            courses.forEach(course => {
+                const row = table.insertRow();
+                row.insertCell(0).innerText = course.name;
+                row.insertCell(1).innerText = course.sks;
+                row.insertCell(2).innerText = course.priority;
+                const buttonCell = row.insertCell(3);
+                const button = document.createElement('button');
+                button.innerText = 'Retake';
+                button.onclick = () => retakeCourse(course.name, course.sks);
+                buttonCell.appendChild(button);
+            });
+        }
+
+        function retakeCourse(courseName, sks) {
+            const course = currentUser.reculang_courses.find(course => course.name === courseName);
+            if (course) {
+                const retake = confirm(`Retake ${courseName}?`);
+                if (!retake) {
+                    course.sks = 0;
+                }
+            }
+        }
+
+        function gotoRecommendation() {
+            document.getElementById('user-data-page').style.display = "none";
+            window.scrollTo(0, 0)
+
+            const paket_courses = currentUser.paket_courses;
+            const ulang_courses = currentUser.ulang_courses;
+            const reculang_courses = currentUser.reculang_courses;
+            const atas_courses = currentUser.atas_courses;
+
+            const all_courses = [...paket_courses, ...ulang_courses, ...reculang_courses.filter(course => course.sks > 0), ...atas_courses];
+
+            const bruteStartTime = performance.now();
+            const bruteResult = bruteForce(all_courses, 24);
+            const bruteEndTime = performance.now();
+            const bruteExecutionTime = bruteEndTime - bruteStartTime;
+
+            const greedyStartTime = performance.now();
+            const greedyResult = greedy(all_courses, 24);
+            const greedyEndTime = performance.now();
+            const greedyExecutionTime = greedyEndTime - greedyStartTime;
+
+            renderCourseTable('brute-force-courses', bruteResult);
+            document.getElementById('brute-force-sks').innerText = sumSKS(bruteResult);
+            document.getElementById('brute-force-priority').innerText = sumPriority(bruteResult);
+            document.getElementById('brute-force-time').innerText = bruteExecutionTime.toFixed(2);
+
+            renderCourseTable('greedy-courses', greedyResult);
+            document.getElementById('greedy-sks').innerText = sumSKS(greedyResult);
+            document.getElementById('greedy-priority').innerText = sumPriority(greedyResult);
+            document.getElementById('greedy-time').innerText = greedyExecutionTime.toFixed(2);
+
+            document.getElementById('execution-comparison').innerText = compareExecutionTime(bruteExecutionTime, greedyExecutionTime);
+
+            document.getElementById('recommendation-page').style.display = "block";
+        }
+
+        function bruteForce(courseList, maxSks) {
+            const n = courseList.length;
+            let bestCombination = [];
+            let bestPriority = 0;
+
+            for (let i = 0; i < (1 << n); i++) {
+                let currentSks = 0;
+                let currentPriority = 0;
+                let currentCombination = [];
+
+                for (let j = 0; j < n; j++) {
+                    if (i & (1 << j)) {
+                        currentSks += courseList[j].sks;
+                        currentPriority += courseList[j].priority;
+                        currentCombination.push(courseList[j]);
+                    }
+                }
+
+                if (currentSks <= maxSks && currentPriority > bestPriority) {
+                    bestPriority = currentPriority;
+                    bestCombination = currentCombination;
+                }
+            }
+
+            return bestCombination;
+        }
+
+        function greedy(courseList, maxSks) {
+            courseList.sort((a, b) => b.priority - a.priority);
+
+            let currentSks = 0;
+            const selectedCourses = [];
+
+            for (const course of courseList) {
+                if (currentSks + course.sks <= maxSks) {
+                    selectedCourses.push(course);
+                    currentSks += course.sks;
+                }
+            }
+
+            return selectedCourses;
+        }
+
+        function sumSKS(courses) {
+            return courses.reduce((total, course) => total + course.sks, 0);
+        }
+
+        function sumPriority(courses) {
+            return courses.reduce((total, course) => total + course.priority, 0);
+        }
+
+        function compareExecutionTime(bruteTime, greedyTime) {
+            if (bruteTime < greedyTime) {
+                return "Waktu eksekusi dengan metode Brute Force lebih efektif.";
+            } else if (bruteTime > greedyTime) {
+                return "Waktu eksekusi dengan metode Greedy lebih efektif.";
+            } else {
+                return "Kedua metode memiliki waktu eksekusi yang sama.";
+            }
+        }
+    </script>
+</body>
+</html>
