@@ -1,4 +1,4 @@
-import time as t
+import time as time
 
 # User database
 users = {
@@ -231,14 +231,14 @@ if user_data:
     # Combine results into arrays
     all_courses = paket_courses + ulang_courses + rec_courses + atas_courses
 
-    start_time_brute = t.time()
+    start_time_brute = time.time()
     brute_result = brute_force(all_courses, const.max_sks)
-    end_time_brute = t.time()
+    end_time_brute = time.time()
     brute_execution_time = end_time_brute - start_time_brute
 
-    start_time_greedy = t.time()
+    start_time_greedy = time.time()
     greedy_result = greedy(all_courses, const.max_sks)
-    end_time_greedy = t.time()
+    end_time_greedy = time.time()
     greedy_execution_time = end_time_greedy - start_time_greedy
 
     # Print selected courses
