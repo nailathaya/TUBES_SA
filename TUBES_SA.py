@@ -275,7 +275,7 @@ if user_data:
     print()
 
     print("== WAKTU EKSEKUSI ==")
-    print(f"Waktu eksekusi Brute Force:, {brute_execution_time.total_seconds() * 1000:.2f} ms")
+    print("Waktu eksekusi Brute Force:", brute_execution_time)
     print("Waktu eksekusi Greedy:", greedy_execution_time)
 
     if brute_execution_time < greedy_execution_time:
