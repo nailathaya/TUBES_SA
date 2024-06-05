@@ -1,4 +1,4 @@
-import time as t 
+import time as t
 
 # User database
 users = {
@@ -17,10 +17,8 @@ users = {
         ],
         "ulang_courses": [
         ],
-
         "reculang_courses": [
         ],
-
         "atas_courses": [
             {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
             {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
@@ -43,10 +41,8 @@ users = {
         ],
         "ulang_courses": [
         ],
-
         "reculang_courses": [
         ],
-        
         "atas_courses": [
             {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
             {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
@@ -70,7 +66,6 @@ users = {
             {"name": "Algoritma Pemrograman", "sks": 4, "priority": 11}
         ],
         "reculang_courses": [
-            
         ],
         "atas_courses": [
             {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
@@ -92,10 +87,8 @@ users = {
             {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
         ],
         "ulang_courses": [
-    
         ],
         "reculang_courses": [
-            
         ],
         "atas_courses": [
             {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
@@ -117,10 +110,8 @@ users = {
             {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
         ],
         "ulang_courses": [
-    
         ],
         "reculang_courses": [
-            
         ],
         "atas_courses": [
             {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
@@ -193,30 +184,31 @@ class const:
     
 
 # MATKUL PAKET DAN ULANG
-def calc_AbsUlang(ulang_courses):
-    curr_sks = const.total_paket_sks
+def calc_AbsUlang(ulang_courses, total_paket_sks):
+    curr_sks = total_paket_sks
     if len(ulang_courses) > 0:
         total_ulang_sks = sum(course['sks'] for course in ulang_courses)
-        if const.total_paket_sks + total_ulang_sks <= const.max_sks:
-            curr_sks = const.total_paket_sks + total_ulang_sks
+        if total_paket_sks + total_ulang_sks <= const.max_sks:
+            curr_sks = total_paket_sks + total_ulang_sks
     return curr_sks
 
+
 # MATKUL DISARANKAN MENGULANG
-def calc_RecUlang(curr_sks, Reculang_course):
-    Rec_course = []
-    for course in Reculang_course:
+def calc_RecUlang(curr_sks, reculang_courses):
+    rec_courses = []
+    for course in reculang_courses:
         print(f"Matkul Disarankan Mengulang: {course['name']}")
         if curr_sks + course['sks'] <= const.max_sks:
             # INPUT USER
             m = input("Mengulang matkul? (y/n): ")
-            if m == 'n':
-                course['sks'] = 0
-            elif m == 'y' and (curr_sks + course['sks'] <= const.max_sks):
+            if m == 'y':
                 curr_sks += course['sks']
-                Rec_course.append(course)
+                rec_courses.append(course)
+            elif m == 'n':
+                continue
         else:
             print(f"Tidak bisa mengulang mata kuliah {course['name']}")
-    return Rec_course
+    return rec_courses
 
 # SISA SKS 
 def calc_RemainingSKS(curr_sks):
@@ -227,26 +219,26 @@ user_data = login()
 if user_data:
     paket_courses = user_data['paket_courses']
     ulang_courses = user_data['ulang_courses']
-    Reculang_course = user_data['Reculang_course']
+    reculang_courses = user_data['reculang_courses']
     atas_courses = user_data['atas_courses']
 
     total_paket_sks = sum(course['sks'] for course in paket_courses)
 
     # Calculate current SKS after adding repeated and recommended courses
     current_sks = calc_AbsUlang(ulang_courses, total_paket_sks)
-    rec_courses = calc_RecUlang(current_sks, Reculang_course)
+    rec_courses = calc_RecUlang(current_sks, reculang_courses)
 
     # Combine results into arrays
     all_courses = paket_courses + ulang_courses + rec_courses + atas_courses
 
-    start_time_brute = time.time()
+    start_time_brute = t.time()
     brute_result = brute_force(all_courses, const.max_sks)
-    end_time_brute = time.time()
+    end_time_brute = t.time()
     brute_execution_time = end_time_brute - start_time_brute
 
-    start_time_greedy = time.time()
+    start_time_greedy = t.time()
     greedy_result = greedy(all_courses, const.max_sks)
-    end_time_greedy = time.time()
+    end_time_greedy = t.time()
     greedy_execution_time = end_time_greedy - start_time_greedy
 
     # Print selected courses
