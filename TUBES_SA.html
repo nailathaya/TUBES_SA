@@ -294,10 +294,61 @@
 
     <script>
         const users = {
-            "u1": {
+            "panjek": {
                 "password": "p1",
-                "nama": "Alice",
-                "nim": "12345678",
+                "nama": "Muhammad Farhan",
+                "nim": "1301220050",
+                "ip": 3.65,
+                "semester": 4,
+                "paket_courses": [
+                    {"name": "Sistem Operasi", "sks": 3, "priority": 9},
+                    {"name": "Jaringan Komputer", "sks": 4, "priority": 10},
+                    {"name": "Strategi Algoritma", "sks": 3, "priority": 8},
+                    {"name": "Teori Bahasa dan Automata", "sks": 3, "priority": 7},
+                    {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
+                ],
+                "ulang_courses": [
+                ],
+
+                "reculang_courses": [
+                ],
+
+                "atas_courses": [
+                    {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
+                    {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
+                    {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
+                ]
+            },
+            "adipra": {
+                "password": "p2",
+                "nama": "Adrian Prakoso",
+                "nim": "1301220278",
+                "ip": 3.39,
+                "semester": 4,
+                "paket_courses": [
+                    {"name": "Sistem Operasi", "sks": 3, "priority": 9},
+                    {"name": "Jaringan Komputer", "sks": 4, "priority": 10},
+                    {"name": "Strategi Algoritma", "sks": 3, "priority": 8},
+                    {"name": "Teori Bahasa dan Automata", "sks": 3, "priority": 7},
+                    {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6},
+                    {"name": "RPL: Analisis dan Perancangan PL", "sks": 3, "priority": 6}
+                ],
+                "ulang_courses": [
+                ],
+
+                "reculang_courses": [
+                ],
+                
+                "atas_courses": [
+                    {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
+                    {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
+                    {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
+                ]
+            },
+            "haidarsr": {
+                "password": "p3",
+                "nama": "Haidar Sayyid",
+                "nim": "1301223105",
                 "ip": 3.6,
                 "semester": 4,
                 "paket_courses": [
@@ -308,11 +359,10 @@
                     {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
                 ],
                 "ulang_courses": [
-                    {"name": "Struktur Data", "sks": 4, "priority": 13}
+                    {"name": "Algoritma Pemrograman", "sks": 4, "priority": 11}
                 ],
                 "reculang_courses": [
-                    {"name": "Kalkulus Lanjut", "sks": 3, "priority": 12},
-                    {"name": "Bahasa Indonesia", "sks": 2, "priority": 11}
+                    
                 ],
                 "atas_courses": [
                     {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
@@ -320,10 +370,10 @@
                     {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
                 ]
             },
-            "u2": {
-                "password": "p2",
-                "nama": "Bob",
-                "nim": "87654321",
+            "maruffirdaus": {
+                "password": "p4",
+                "nama": "Muhammad Ma'ruf Firdaus",
+                "nim": "1301223001",
                 "ip": 3.8,
                 "semester": 4,
                 "paket_courses": [
@@ -334,11 +384,35 @@
                     {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
                 ],
                 "ulang_courses": [
-                    {"name": "Struktur Data", "sks": 4, "priority": 13}
+            
                 ],
                 "reculang_courses": [
-                    {"name": "Kalkulus Lanjut", "sks": 3, "priority": 12},
-                    {"name": "Bahasa Indonesia", "sks": 2, "priority": 11}
+                    
+                ],
+                "atas_courses": [
+                    {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
+                    {"name": "Bahasa Inggris Presentasi", "sks": 3, "priority": 4},
+                    {"name": "Interaksi Manusia Komputer", "sks": 3, "priority": 5}
+                ]
+            },
+            "ditorizkyka": {
+                "password": "p5",
+                "nama": "Andito Rizkyka",
+                "nim": "1301220016",
+                "ip": 3.89,
+                "semester": 4,
+                "paket_courses": [
+                    {"name": "Sistem Operasi", "sks": 3, "priority": 9},
+                    {"name": "Jaringan Komputer", "sks": 4, "priority": 10},
+                    {"name": "Strategi Algoritma", "sks": 3, "priority": 8},
+                    {"name": "Teori Bahasa dan Automata", "sks": 3, "priority": 7},
+                    {"name": "Pengantar Kecerdasan Buatan", "sks": 3, "priority": 6}
+                ],
+                "ulang_courses": [
+            
+                ],
+                "reculang_courses": [
+                    
                 ],
                 "atas_courses": [
                     {"name": "Kewarganegaraan", "sks": 2, "priority": 3},
@@ -347,7 +421,7 @@
                 ]
             }
         };
-
+        
         let currentUser = null;
 
         function login() {
